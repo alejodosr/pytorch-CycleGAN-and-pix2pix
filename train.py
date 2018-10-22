@@ -3,6 +3,7 @@ from options.train_options import TrainOptions
 from data import CreateDataLoader
 from models import create_model
 from util.visualizer import Visualizer
+import commands
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()
@@ -46,6 +47,9 @@ if __name__ == '__main__':
                 print('saving the latest model (epoch %d, total_steps %d)' %
                       (epoch, total_steps))
                 model.save_networks('latest')
+                # Save in Drive
+                drive_path = 'cp -rf "./checkpoints/simdronet_steering_cycle_gan" "/content/drive/My Drive/PhD/cloud/projects/simdronet/results/training/model_cyclegan_512_steering' + str(opt.training_number) + '"'
+                commands.getstatusoutput(drive_path)
 
             iter_data_time = time.time()
         if epoch % opt.save_epoch_freq == 0:
