@@ -8,7 +8,7 @@ from scipy.misc import imresize
 
 
 # save image to the disk
-def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
+def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256, last_image_path=""):
     image_dir = webpage.get_image_dir()
     short_path = ntpath.basename(image_path[0])
     name = os.path.splitext(short_path)[0]
@@ -21,11 +21,23 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
         image_name = '%s_%s.png' % (name, label)
         save_path = os.path.join(image_dir, image_name)
         h, w, _ = im.shape
-        if aspect_ratio > 1.0:
-            im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
-        if aspect_ratio < 1.0:
-            im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
-        util.save_image(im, save_path)
+
+        if (len(last_image_path) > 0):
+            WIDTH = 640
+            HEIGHT = 480
+            im = imresize(im, (HEIGHT, WIDTH), interp='bicubic')
+        else:
+            if aspect_ratio > 1.0:
+                im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
+            if aspect_ratio < 1.0:
+                im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
+
+        if (len(last_image_path) > 0):
+            if (label == "fake_B"):
+                print("Saving " + last_image_path + "...")
+                util.save_image(im, last_image_path)
+        else:
+            util.save_image(im, save_path)
 
         ims.append(image_name)
         txts.append(label)

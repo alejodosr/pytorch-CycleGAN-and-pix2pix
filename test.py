@@ -21,6 +21,15 @@ if __name__ == '__main__':
     web_dir = os.path.join(opt.results_dir, opt.name, '%s_%s' % (opt.phase, opt.which_epoch))
     webpage = html.HTML(web_dir, 'Experiment = %s, Phase = %s, Epoch = %s' % (opt.name, opt.phase, opt.which_epoch))
     # test
+
+    # Generate images path list
+    images_paths = []
+    if len(opt.other_dataset) > 0:
+        for subdir, dirs, files in os.walk(opt.other_dataset):
+            for file in sorted(files):
+                if file.endswith(".jpg"):
+                    images_paths.append(os.path.join(subdir, file))
+
     for i, data in enumerate(dataset):
         if i >= opt.how_many:
             break
@@ -30,6 +39,11 @@ if __name__ == '__main__':
         img_path = model.get_image_paths()
         if i % 5 == 0:
             print('processing (%04d)-th image... %s' % (i, img_path))
-        save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
+
+        last_image_path = ""
+        if len(opt.other_dataset) > 0:
+            last_image_path = images_paths[i]
+
+        save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize, last_image_path=last_image_path)
 
     webpage.save()
