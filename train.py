@@ -48,6 +48,7 @@ if __name__ == '__main__':
                       (epoch, total_steps))
                 model.save_networks('latest')
                 # Save in Drive
+                print("Saving back to Drive.. model(" + MODEL_NAME + ")")
                 drive_path = 'cp -rf "./checkpoints/' + MODEL_NAME + '" "/content/drive/My Drive/PhD/cloud/projects/' + PROJECT_NAME + '/results/training/' + MODEL_NAME + '_' + opt.training_string + '"'
                 commands.getstatusoutput(drive_path)
 
