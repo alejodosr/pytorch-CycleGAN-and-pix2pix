@@ -48,7 +48,7 @@ if __name__ == '__main__':
                       (epoch, total_steps))
                 model.save_networks('latest')
                 # Save in Drive
-                drive_path = 'cp -rf "./checkpoints/simdronet_steering_cycle_gan" "/content/drive/My Drive/PhD/cloud/projects/simdronet/results/training/model_cyclegan_steering_' + opt.training_string + '"'
+                drive_path = 'cp -rf "./checkpoints/' + MODEL_NAME + '" "/content/drive/My Drive/PhD/cloud/projects/' + PROJECT_NAME + '/results/training/' + MODEL_NAME + '_' + opt.training_string + '"'
                 commands.getstatusoutput(drive_path)
 
             iter_data_time = time.time()
