@@ -50,8 +50,8 @@ if __name__ == '__main__':
                 # Save in Drive
                 # print("Saving back to Drive.. model(" + MODEL_NAME + ")")
                 # drive_path = 'cp -rf "./checkpoints/' + MODEL_NAME + '"/content/drive/My Drive/PhD/cloud/projects/' + PROJECT_NAME + '/results/training/' + MODEL_NAME + '_' + opt.training_string + '"'
-                print("Saving back to Drive.. model(" + "isolator_cycle_gan" + ")")
-                drive_path = 'cp -rf "./checkpoints/' + 'isolator_cycle_gan' + '"' + ' "/content/drive/My Drive/PhD/cloud/projects/' + 'isolators' + '/results/training/' + 'isolator_cycle_gan' + '_' + opt.training_string + '"'
+                print("Saving back to Drive.. model(" + opt.name + ")")
+                drive_path = 'cp -rf "./checkpoints/' + opt.name + '"' + ' "/content/drive/My Drive/PhD/cloud/projects/' + opt.project_name + '/results/training/' + opt.name + '_' + opt.training_string + '"'
                 commands.getstatusoutput(drive_path)
 
             iter_data_time = time.time()
