@@ -24,6 +24,7 @@ class TrainOptions(BaseOptions):
         parser.add_argument('--lr_policy', type=str, default='lambda', help='learning rate policy: lambda|step|plateau')
         parser.add_argument('--lr_decay_iters', type=int, default=50, help='multiply by a gamma every lr_decay_iters iterations')
         parser.add_argument('--training_string', type=str, default='1', help='training string to append to model folder in Drive')
+        parser.add_argument('--project_name', type=str, default='unknown', help='string of the project folder in Drive')
 
         self.isTrain = True
         return parser
