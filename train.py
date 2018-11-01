@@ -47,9 +47,10 @@ if __name__ == '__main__':
                 print('saving the latest model (epoch %d, total_steps %d)' %
                       (epoch, total_steps))
                 model.save_networks('latest')
-                # Save in Drive
-                # print("Saving back to Drive.. model(" + MODEL_NAME + ")")
-                # drive_path = 'cp -rf "./checkpoints/' + MODEL_NAME + '"/content/drive/My Drive/PhD/cloud/projects/' + PROJECT_NAME + '/results/training/' + MODEL_NAME + '_' + opt.training_string + '"'
+
+                # Saving back to drive
+                drive_path = 'echo ' + str(epoch) + ' >./checkpoints/' + opt.name + '/total_ecpochs.txt'
+                commands.getstatusoutput(drive_path)
                 print("Saving back to Drive.. model(" + opt.name + ")")
                 drive_path = 'cp -rf "./checkpoints/' + opt.name + '"' + ' "/content/drive/My Drive/PhD/cloud/projects/' + opt.project_name + '/results/training/' + opt.name + '_' + opt.training_string + '"'
                 commands.getstatusoutput(drive_path)
@@ -60,6 +61,14 @@ if __name__ == '__main__':
                   (epoch, total_steps))
             model.save_networks('latest')
             model.save_networks(epoch)
+
+            # Saving back to drive
+            drive_path = 'echo ' + str(epoch) + ' >./checkpoints/' + opt.name + '/total_ecpochs.txt'
+            commands.getstatusoutput(drive_path)
+            print("Saving back to Drive.. model(" + opt.name + ")")
+            drive_path = 'cp -rf "./checkpoints/' + opt.name + '"' + ' "/content/drive/My Drive/PhD/cloud/projects/' + opt.project_name + '/results/training/' + opt.name + '_' + opt.training_string + '"'
+            commands.getstatusoutput(drive_path)
+
 
         print('End of epoch %d / %d \t Time Taken: %d sec' %
               (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time))
